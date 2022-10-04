@@ -1,0 +1,21 @@
+/**
+本css作为全局css样式使用
+ */
+
+/*消除页面下方白边，统一格式*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*以下三项为全局的自定义样式，方便调用*/
+.ml-5 {
+    margin-left: 5px;
+}
+.mr-5 {
+    margin-right: 5px;
+}
+.pd-10 {
+    padding: 10px 0;
+}

@@ -1,0 +1,32 @@
+# 修改后端服务的端口号，以免和前端服务端口号冲突
+server:
+  port: 9090
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver # 配置MySql数据库驱动
+    url: jdbc:mysql://localhost:3306/bms?serverTimezone=GMT%2b8 # 配置MySql的url
+    username: root # 配置数据库的用户名
+    password: 990929 # 配置数据库的密码
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher # 解决Springboot与Swagger-Ui版本不兼容的问题
+
+# 扫描所有mybatis的xml文件
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+# Mybatis-Plus的日志
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# 文件的保存地址
+files:
+  upload:
+    path: D:/Software/Java_Code/Java_Project/SpringBoot/springboot/src/main/resources/files/
+
+
+
+
+
