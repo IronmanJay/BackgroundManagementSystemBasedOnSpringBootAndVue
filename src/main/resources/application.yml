@@ -24,7 +24,7 @@ mybatis-plus:
 # 文件的保存地址
 files:
   upload:
-    path: D:/Software/Java_Code/Java_Project/SpringBoot/springboot/src/main/resources/files/
+    path: D:/Software/Java_Code/BackgroundManagementSystemBasedOnSpringBootAndVue/src/main/resources/files/
 
 
 

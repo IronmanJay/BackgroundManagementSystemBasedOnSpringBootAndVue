@@ -83,6 +83,20 @@ public class UserController {
     }
 
     /**
+     * 查询当前角色的所有用户
+     *
+     * @param role 角色
+     * @return 返回当前角色的所有用户
+     */
+    @GetMapping("/role/{role}")
+    public Result findUsersByRole(@PathVariable String role) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("role", role);
+        List<User> list = userService.list(queryWrapper);
+        return Result.success(list);
+    }
+
+    /**
      * 查找数据
      *
      * @param id 要查找的用户id
