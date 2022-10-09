@@ -6,6 +6,7 @@ import com.ironmanjay.springboot.entity.Course;
 import com.ironmanjay.springboot.mapper.CourseMapper;
 import com.ironmanjay.springboot.service.ICourseService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -26,6 +27,13 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     @Override
     public Page<Course> findPage(Page<Course> page, String name) {
         return courseMapper.findPage(page, name);
+    }
+
+    @Transactional
+    @Override
+    public void setStudentCourse(Integer courseId, Integer studentId) {
+        courseMapper.deleteStudentCourse(courseId, studentId);
+        courseMapper.setStudentCourse(courseId, studentId);
     }
 
 }

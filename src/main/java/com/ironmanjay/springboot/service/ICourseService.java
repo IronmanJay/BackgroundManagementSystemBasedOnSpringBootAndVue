@@ -16,4 +16,6 @@ public interface ICourseService extends IService<Course> {
 
     Page<Course> findPage(Page<Course> page, String name);
 
+    void setStudentCourse(Integer courseId, Integer studentId);
+
 }

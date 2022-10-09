@@ -32,6 +32,12 @@ public class CourseController {
         return Result.success();
     }
 
+    @PostMapping("/studentCourse/{courseId}/{studentId}")
+    public Result studentCourse(@PathVariable Integer courseId, @PathVariable Integer studentId) {
+        courseService.setStudentCourse(courseId, studentId);
+        return Result.success();
+    }
+
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id) {
         courseService.removeById(id);

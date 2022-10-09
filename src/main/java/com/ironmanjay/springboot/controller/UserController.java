@@ -14,7 +14,6 @@ import com.ironmanjay.springboot.controller.dto.UserDTO;
 import com.ironmanjay.springboot.controller.dto.UserPasswordDTO;
 import com.ironmanjay.springboot.entity.User;
 import com.ironmanjay.springboot.service.IUserService;
-import com.ironmanjay.springboot.utils.TokenUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -120,22 +119,8 @@ public class UserController {
      * @RequestParam 接收?pageNum=1&pageSize=10
      */
     @GetMapping("/page")
-    public Page<User> findPage(@RequestParam Integer pageNum, @RequestParam Integer pageSize, @RequestParam(defaultValue = "") String username, @RequestParam(defaultValue = "") String email, @RequestParam(defaultValue = "") String address) {
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        if (!"".equals(username)) {
-            queryWrapper.like("username", username);
-        }
-        if (!"".equals(email)) {
-            queryWrapper.like("email", email);
-        }
-        if (!"".equals(address)) {
-            queryWrapper.like("address", address);
-        }
-        // 获取当前用户信息
-        User currentUser = TokenUtils.getCurrentUser();
-        System.out.println("当前登录的用户昵称为==============>" + currentUser.getNickname());
-        queryWrapper.orderByDesc("id");
-        return userService.page(new Page<>(pageNum, pageSize), queryWrapper);
+    public Result findPage(@RequestParam Integer pageNum, @RequestParam Integer pageSize, @RequestParam(defaultValue = "") String username, @RequestParam(defaultValue = "") String email, @RequestParam(defaultValue = "") String address) {
+        return Result.success(userService.findPage(new Page<>(pageNum, pageSize), username, email, address));
     }
 
     /**

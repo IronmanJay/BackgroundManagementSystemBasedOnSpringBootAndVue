@@ -6,7 +6,8 @@
             <el-button type="warning" @click="reset">重置</el-button>
         </div>
         <div style="margin: 10px 0">
-            <el-button type="primary" @click="handleAdd">新增 <i class="el-icon-circle-plus-outline"></i></el-button>
+            <el-button type="primary" @click="handleAdd" v-if="user.role === 'ROLE_ADMIN'">新增 <i
+                    class="el-icon-circle-plus-outline"></i></el-button>
             <el-popconfirm
                     class="ml-5"
                     confirm-button-text='确定'
@@ -34,9 +35,11 @@
                                @change="changeEnable(scope.row)"></el-switch>
                 </template>
             </el-table-column>
-            <el-table-column label="操作" width="200" align="center">
+            <el-table-column label="操作" width="280" align="center">
                 <template slot-scope="scope">
-                    <el-button type="success" @click="handleEdit(scope.row)">编辑 <i class="el-icon-edit"></i></el-button>
+                    <el-button type="primary" @click="selectCourse(scope.row.id)">选课</el-button>
+                    <el-button type="success" @click="handleEdit(scope.row)" v-if="user.role === 'ROLE_ADMIN'">编辑 <i
+                            class="el-icon-edit"></i></el-button>
                     <el-popconfirm
                             class="ml-5"
                             confirm-button-text='确定'
@@ -45,7 +48,8 @@
                             icon-color="red"
                             title="您确定删除吗？"
                             @confirm="del(scope.row.id)">
-                        <el-button type="danger" slot="reference">删除 <i class="el-icon-remove-outline"></i></el-button>
+                        <el-button type="danger" slot="reference" v-if="user.role === 'ROLE_ADMIN'">删除 <i
+                                class="el-icon-remove-outline"></i></el-button>
                     </el-popconfirm>
                 </template>
             </el-table-column>
@@ -124,6 +128,15 @@
                 });
                 this.request.get("/user/role/ROLE_TEACHER").then(res => {
                     this.teachers = res.data
+                })
+            },
+            selectCourse(courseId) {
+                this.request.post("/course/studentCourse/" + courseId + "/" + this.user.id).then(res => {
+                    if (res.code === '200') {
+                        this.$message.success("选课成功")
+                    } else {
+                        this.$message.success(res.msg)
+                    }
                 })
             },
             changeEnable(row) {
