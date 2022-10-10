@@ -53,6 +53,20 @@
     }
 </script>
 
-<style scoped>
 
+<style>
+    .el-menu-item.is-active {
+        background-color: rgb(38, 52, 69) !important;
+    }
+    .el-menu-item:hover {
+        background-color: rgb(38, 52, 69) !important;
+    }
+
+    .el-submenu__title:hover {
+        background-color: rgb(38, 52, 69) !important;
+    }
+    /*解决收缩菜单文字不消失问题*/
+    .el-menu--collapse span {
+        visibility: hidden;
+    }
 </style>

@@ -51,8 +51,14 @@
                                 localStorage.setItem("menus", JSON.stringify(res.data.menus))
                                 // 动态设置当前用户的路由
                                 setRoutes()
-                                this.$router.push("/")
-                                this.$message.success("登陆成功")
+                                this.$message.success("登录成功")
+
+                                if (res.data.role === 'ROLE_STUDENT') {
+                                    this.$router.push("/front/home")
+                                } else {
+                                    this.$router.push("/")
+                                }
+
                             } else {
                                 this.$message.error(res.msg)
                             }

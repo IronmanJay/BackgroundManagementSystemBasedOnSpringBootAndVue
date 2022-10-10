@@ -22,6 +22,18 @@ const routes = [
         name: '404',
         component: () => import('../views/404.vue')
     },
+    {
+        path: '/front',
+        name: 'Front',
+        component: () => import('../views/front/Front.vue'),
+        children:[
+            {
+                path: 'home',
+                name: 'FrontHome',
+                component: () => import('../views/front/Home.vue')
+            },
+        ]
+    },
 ]
 
 const router = new VueRouter({
