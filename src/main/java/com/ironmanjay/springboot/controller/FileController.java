@@ -10,6 +10,7 @@ import com.ironmanjay.springboot.common.Result;
 import com.ironmanjay.springboot.entity.Files;
 import com.ironmanjay.springboot.mapper.FileMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -33,6 +34,11 @@ public class FileController {
 
     @Resource
     private FileMapper fileMapper;
+
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
+
+    public static final String FILES_KEY = "FILES_FRONT_ALL";
 
     /**
      * 文件上传接口
@@ -76,6 +82,7 @@ public class FileController {
         saveFile.setUrl(url);
         saveFile.setMd5(md5);
         fileMapper.insert(saveFile);
+        flushRedis(FILES_KEY);
         return url;
     }
 
@@ -142,7 +149,9 @@ public class FileController {
      */
     @PostMapping("/update")
     public Result update(@RequestBody Files files) {
-        return Result.success(fileMapper.updateById(files));
+        fileMapper.updateById(files);
+        flushRedis(FILES_KEY);
+        return Result.success();
     }
 
     /**
@@ -156,6 +165,7 @@ public class FileController {
         Files files = fileMapper.selectById(id);
         files.setIsDelete(true);
         fileMapper.updateById(files);
+        flushRedis(FILES_KEY);
         return Result.success();
     }
 
@@ -175,6 +185,15 @@ public class FileController {
             fileMapper.updateById(file);
         }
         return Result.success();
+    }
+
+    /**
+     * 删除缓存
+     *
+     * @param key 要删除的缓存key
+     */
+    private void flushRedis(String key) {
+        stringRedisTemplate.delete(key);
     }
 
 }

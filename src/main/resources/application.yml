@@ -8,6 +8,9 @@ spring:
     url: jdbc:mysql://localhost:3306/bms?serverTimezone=GMT%2b8 # 配置MySql的url
     username: root # 配置数据库的用户名
     password: 990929 # 配置数据库的密码
+  redis:
+    host: 127.0.0.1
+    port: 6379
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher # 解决Springboot与Swagger-Ui版本不兼容的问题
