@@ -11,8 +11,10 @@
     "core-js": "^3.8.3",
     "echarts": "^5.3.3",
     "element-ui": "^2.15.9",
+    "video.js": "^7.20.3",
     "vue": "^2.6.14",
     "vue-router": "^3.5.1",
+    "vue-video-player": "^5.0.2",
     "vuex": "^3.6.2"
   },
   "devDependencies": {

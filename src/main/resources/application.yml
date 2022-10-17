@@ -11,6 +11,10 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher # 解决Springboot与Swagger-Ui版本不兼容的问题

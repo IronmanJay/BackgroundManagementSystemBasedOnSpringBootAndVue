@@ -170,6 +170,17 @@ public class FileController {
     }
 
     /**
+     * 按照文件id查询
+     *
+     * @param id 待查询的文件id
+     * @return 返回查询结果
+     */
+    @GetMapping("/detail/{id}")
+    public Result getById(@PathVariable Integer id) {
+        return Result.success(fileMapper.selectById(id));
+    }
+
+    /**
      * 按照id批量删除文件
      *
      * @param ids 待删除的文件id即可
