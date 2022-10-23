@@ -26,7 +26,7 @@ const routes = [
         path: '/front',
         name: 'Front',
         component: () => import('../views/front/Front.vue'),
-        children:[
+        children: [
             {
                 path: 'home',
                 name: 'FrontHome',
@@ -41,6 +41,16 @@ const routes = [
                 path: 'videoDetail',
                 name: 'FrontVideoDetail',
                 component: () => import('../views/front/VideoDetail.vue')
+            },
+            {
+                path: 'article',
+                name: 'FrontArticle',
+                component: () => import('../views/front/Article.vue')
+            },
+            {
+                path: 'articleDetail',
+                name: 'FrontArticleDetail',
+                component: () => import('../views/front/ArticleDetail.vue')
             },
         ]
     },

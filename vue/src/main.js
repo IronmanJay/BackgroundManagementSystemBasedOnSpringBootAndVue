@@ -9,6 +9,12 @@ import './assets/gloable.css'
 import request from "@/utils/request";
 import store from './store/store'
 
+// main.js全局注册
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
+// use
+Vue.use(mavonEditor)
+
 Vue.config.productionTip = false;
 
 // 设置大小，适配屏幕
